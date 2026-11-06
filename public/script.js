@@ -67,7 +67,15 @@ function displayDiaries() {
     })
 }
 
-function deleteEntry(id) {
+async function deleteEntry(id) {
+    const options = { method: "DELETE" }
+
+    const response = await fetch(`/diary/${id}`, options)
+
+    if (!response.ok) {
+        throw new Error("Failed to delete entry")
+    }
+
     diaries = diaries.filter(diary => diary.id !== id)
     displayDiaries()
 }
