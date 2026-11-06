@@ -1,20 +1,5 @@
 const entryList = document.querySelector("#entry-list")
 
-// let diaries = [
-//     {
-//         id: 1,
-//         title: "first entry",
-//         content: "completing a hackathon project",
-//         createdAt: "2024-06-01T10:00:00Z"
-//     },
-//     {
-//         id: 2,
-//         title: "second entry",
-//         content: "working on diary app",
-//         createdAt: "2024-06-02T14:30:00Z"
-//     }
-// ]
-
 let diaries = []
 
 async function fetchDiaries() {
@@ -24,7 +9,7 @@ async function fetchDiaries() {
         if (!response.ok) {
             throw new Error("Failed to fetch entries")
         }
-        entries = await response.json()
+        diaries = await response.json()
         displayDiaries()
     } catch (error) {
         console.error("Error fetching entries:", error)
