@@ -1,4 +1,7 @@
 const entryList = document.querySelector("#entry-list")
+const entryForm = document.querySelector("#entry-form")
+
+entryForm.addEventListener("submit", addEntry)
 
 let diaries = []
 
@@ -26,8 +29,8 @@ function displayDiaries() {
         const title = document.createElement("h3")
         title.textContent = diary.title
 
-        const content = document.createElement("p")
-        content.textContent = diary.description
+        const description = document.createElement("p")
+        description.textContent = diary.description
 
         const entryContent = document.createElement("div")
         entryContent.classList.add("entry-content")
@@ -59,7 +62,7 @@ function displayDiaries() {
         const entryActions = document.createElement("div")
         entryActions.classList.add("entry-actions")
 
-        entryContent.append(title, content)
+        entryContent.append(title, description)
         entryActions.append(date, buttonContainer)
         
         entry.append(entryContent, entryActions)
@@ -78,6 +81,28 @@ async function deleteEntry(id) {
 
     diaries = diaries.filter(diary => diary.id !== id)
     displayDiaries()
+}
+
+async function addEntry(event) {
+    event.preventDefault()
+
+    const title = event.target.title.value
+    const description = event.target.description.value
+
+    const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, description })
+    }
+
+    const response = await fetch("/diary", options)
+
+    if (!response.ok) {
+        throw new Error("Failed to add entry")
+    }
+
+    event.target.reset()
+    await fetchDiaries()
 }
 
 function editEntry(id) {
