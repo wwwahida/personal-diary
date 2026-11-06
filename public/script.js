@@ -41,8 +41,6 @@ function displayDiaries() {
         })
         date.classList.add("entry-date")
 
-        entryContent.append(title, content)
-
         const deleteButton = document.createElement("button")
         deleteButton.textContent = "Delete"
         deleteButton.classList.add("delete-button")
@@ -53,7 +51,17 @@ function displayDiaries() {
         editButton.classList.add("edit-button")
         editButton.addEventListener("click", () => editEntry(diary.id))
 
-        entry.append(entryContent, date, deleteButton, editButton)
+        const buttonContainer = document.createElement("div")
+        buttonContainer.classList.add("button-container")
+        buttonContainer.append(editButton, deleteButton)
+
+        const entryActions = document.createElement("div")
+        entryActions.classList.add("entry-actions")
+
+        entryContent.append(title, content)
+        entryActions.append(date, buttonContainer)
+        
+        entry.append(entryContent, entryActions)
         entryList.appendChild(entry)
     })
 }
