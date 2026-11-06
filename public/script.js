@@ -46,16 +46,34 @@ function displayDiaries() {
         const deleteButton = document.createElement("button")
         deleteButton.textContent = "Delete"
         deleteButton.classList.add("delete-button")
-        deleteButton.addEventListener("click", () => deleteDiary(diary.id))
+        deleteButton.addEventListener("click", () => deleteEntry(diary.id))
 
-        entry.append(entryContent, date, deleteButton)
+        const editButton = document.createElement("button")
+        editButton.textContent = "Edit"
+        editButton.classList.add("edit-button")
+        editButton.addEventListener("click", () => editEntry(diary.id))
+
+        entry.append(entryContent, date, deleteButton, editButton)
         entryList.appendChild(entry)
     })
 }
 
-function deleteDiary(id) {
+function deleteEntry(id) {
     diaries = diaries.filter(diary => diary.id !== id)
     displayDiaries()
+}
+
+function editEntry(id) {
+    const diary = diaries.find(diary => diary.id === id)
+    if (diary) {
+        const newTitle = prompt("Edit title:", diary.title)
+        const newContent = prompt("Edit content:", diary.content)
+        if (newTitle !== null && newContent !== null) {
+            diary.title = newTitle
+            diary.content = newContent
+            displayDiaries()
+        }
+    }
 }
 
 displayDiaries()

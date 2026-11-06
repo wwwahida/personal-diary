@@ -62,7 +62,7 @@ button:hover {
 .delete-button {
     padding: 5px 10px;
     font-size: 14px;
-    background-color: #ff6b6b;
+    background-color: #efadad;
     color: white;
     border: none;
     border-radius: 4px;
@@ -70,5 +70,19 @@ button:hover {
 }
 
 .delete-button:hover {
-    background-color: #ff4c4c;
+    background-color: #ee6277;
+}
+
+.edit-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: #f9bcff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    background-color: #ff00f7;
 }
