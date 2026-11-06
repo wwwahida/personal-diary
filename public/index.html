@@ -9,5 +9,22 @@
 </head>
 <body>
     <h1>Welcome to Your Personal Diary</h1>
+
+    <section id="entry-form">
+        <h2>New Entry</h2>
+        <form id="diary-form">
+            <input type="text" id="entry-title" name="entry-title" placeholder="Entry Title" required>
+            <textarea id="entry-content" name="entry-content" placeholder="Write your entry here..." rows="5" required></textarea>
+            <button type="submit">Add Entry</button>
+            <!-- delete button -->
+            <!-- edit button -->
+
+        </form>
+    </section>
+
+    <section id="entries">
+        <h2>Your Entries</h2>
+        <ul id="entry-list"></ul>
+    </section>
 </body>
 </html>
