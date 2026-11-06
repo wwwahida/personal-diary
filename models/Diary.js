@@ -15,15 +15,16 @@ static async getAll() {
     return response.rows.map(row => new Diary(row));
 }
 
-static async getOneByID(id) {
-    const response = await db.query('SELECT * FROM diary WHERE id = $1;', [id]);
+static async getByDate(date) {
+    const response = await db.query(
+        `SELECT * FROM diary
+         WHERE date >= $1::date
+         AND date < ($1::date + INTERVAL '1 day')
+         ORDER BY date DESC;`,
+        [date]
+    );
 
-    if (response.rows.length !== 1) {
-        throw new Error(`Diary entry not found.`);
-}
-
-    return new Diary(response.rows[0]);
-
+    return response.rows.map(row => new Diary(row));
 }
 }
 module.exports = Diary;

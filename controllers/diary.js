@@ -10,9 +10,9 @@ async function index(req, res) {
 }
 
 async function show(req, res) {
-    const { id } = req.params;
+    const { date } = req.params;
     try {
-        const diaryEntry = await Diary.getOneByID(id);
+        const diaryEntry = await Diary.getByDate(date);
         res.status(200).json(diaryEntry);
     } catch (error) {
         res.status(404).json({ error: error.message });
