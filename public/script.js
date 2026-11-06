@@ -1,6 +1,6 @@
 const entryList = document.querySelector("#entry-list")
 
-const diaries = [
+let diaries = [
     {
         id: 1,
         title: "first entry",
@@ -42,9 +42,20 @@ function displayDiaries() {
         date.classList.add("entry-date")
 
         entryContent.append(title, content)
-        entry.append(entryContent, date)
+
+        const deleteButton = document.createElement("button")
+        deleteButton.textContent = "Delete"
+        deleteButton.classList.add("delete-button")
+        deleteButton.addEventListener("click", () => deleteDiary(diary.id))
+
+        entry.append(entryContent, date, deleteButton)
         entryList.appendChild(entry)
     })
+}
+
+function deleteDiary(id) {
+    diaries = diaries.filter(diary => diary.id !== id)
+    displayDiaries()
 }
 
 displayDiaries()
