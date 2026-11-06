@@ -1,7 +1,9 @@
 const entryList = document.querySelector("#entry-list")
 const entryForm = document.querySelector("#entry-form")
+const filterForm = document.querySelector("#filter-form")
 
 entryForm.addEventListener("submit", addEntry)
+filterForm.addEventListener("submit", filterEntries)
 
 let diaries = []
 
@@ -105,14 +107,30 @@ async function addEntry(event) {
     await fetchDiaries()
 }
 
+async function filterEntries(event) {
+    event.preventDefault()
+
+    const date = document.querySelector("#filter-date").value
+
+    const response = await fetch(`/diary/${date}`)
+
+    if (!response.ok) {
+        throw new Error("Failed to filter entries")
+    }
+
+    diaries = await response.json()
+    displayDiaries()
+}
+
+
 function editEntry(id) {
     const diary = diaries.find(diary => diary.id === id)
     if (diary) {
         const newTitle = prompt("Edit title:", diary.title)
-        const newContent = prompt("Edit content:", diary.content)
+        const newContent = prompt("Edit content:", diary.description)
         if (newTitle !== null && newContent !== null) {
             diary.title = newTitle
-            diary.content = newContent
+            diary.description = newContent
             displayDiaries()
         }
     }

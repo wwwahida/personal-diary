@@ -8,8 +8,7 @@ CREATE TABLE diary (
     PRIMARY KEY (id)
 );
 
-INSERT INTO diary (title, description) VALUES
-('My First Entry', 'Today I started my personal diary.'),
-('Vacation Plans', 'I am planning a vacation to the mountains next month. Can’t wait to go hiking!');
-
+INSERT INTO diary (title, description, date) VALUES
+('My First Entry', 'Today I started my personal diary.', '2026-10-01 10:00:00'),
+('Vacation Plans', 'I am planning a vacation to the mountains next month. Can’t wait to go hiking!', '2026-10-03 09:45:00');
 

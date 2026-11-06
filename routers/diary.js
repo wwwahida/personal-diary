@@ -5,7 +5,7 @@ const diaryController = require('../controllers/diary');
 const router = Router();
 
 router.get('/', diaryController.index);
-router.get('/:date', diaryController.show);
+router.get('/:date', diaryController.getByDate);
 router.delete('/:id', diaryController.destroy);
 router.post('/', diaryController.create);
 
