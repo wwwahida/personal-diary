@@ -29,4 +29,17 @@ async function destroy(req, res) {
     res.status(404).json({ error: err.message })
 }
 }
-module.exports = { index , show, destroy };
+async function create(req, res) {
+    try {
+        const data = req.body;
+
+        if (!data.title || !data.description) {
+            return res.status(400).json({ error: 'Title and description are required' });
+        }
+        const newEntry = await Diary.create(data);
+        res.status(201).json(newEntry);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+module.exports = { index , show, destroy, create };

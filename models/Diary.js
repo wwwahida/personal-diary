@@ -36,5 +36,15 @@ static async destroy(id) {
     return new Diary(response.rows[0]);
 }
 
+static async create(data) {
+    const { title, description } = data;
+
+    const response = await db.query(
+        'INSERT INTO diary (title, description) VALUES ($1, $2) RETURNING *;',
+        [title, description]
+    );
+
+    return new Diary(response.rows[0]);
+}
 }
 module.exports = Diary;
