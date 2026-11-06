@@ -98,3 +98,15 @@ button:hover {
     align-items: flex-end;
     gap: 10px;
 }
+
+#filter-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#filter-date {
+    width: auto;
+}
