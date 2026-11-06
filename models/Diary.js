@@ -18,8 +18,7 @@ static async getAll() {
 static async getByDate(date) {
     const response = await db.query(
         `SELECT * FROM diary
-         WHERE date >= $1::date
-         AND date < ($1::date + INTERVAL '1 day')
+         WHERE date >= $1::date AND date < ($1::date + INTERVAL '1 day')
          ORDER BY date DESC;`,
         [date]
     );
