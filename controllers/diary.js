@@ -19,4 +19,14 @@ async function show(req, res) {
     }
 }
 
-module.exports = { index , show };
+async function destroy(req, res) {
+    try{
+    const id = req.params.id;
+
+    await Diary.destroy(id)
+    res.status(204).end();
+}catch (err) {
+    res.status(404).json({ error: err.message })
+}
+}
+module.exports = { index , show, destroy };

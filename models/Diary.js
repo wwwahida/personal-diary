@@ -25,5 +25,16 @@ static async getByDate(date) {
 
     return response.rows.map(row => new Diary(row));
 }
+
+static async destroy(id) {
+    const response =  await db.query('DELETE FROM diary WHERE id = $1 RETURNING *;', [id]);
+
+    if (response.rows.length === 0) {
+        throw new Error('Diary entry not found');
+    }
+
+    return new Diary(response.rows[0]);
+}
+
 }
 module.exports = Diary;
